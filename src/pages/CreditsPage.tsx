@@ -8,9 +8,9 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 
 const CREDIT_PACKS = [
-  { amount: 10, label: "Starter", price: "Free", icon: Sparkles, description: "Get started with basic features", highlight: false },
-  { amount: 50, label: "Writer", price: "$4.99", icon: Zap, description: "Perfect for short stories & essays", highlight: true },
-  { amount: 200, label: "Author", price: "$14.99", icon: Crown, description: "Full novels & deep analysis", highlight: false },
+  { pack: "starter", amount: 20, label: "Starter", price: "₹99", icon: Sparkles, description: "Get started with basic features", highlight: false },
+  { pack: "pro", amount: 60, label: "Pro", price: "₹249", icon: Zap, description: "Perfect for short stories & essays", highlight: true },
+  { pack: "unlimited", amount: 150, label: "Unlimited", price: "₹499", icon: Crown, description: "Full novels & deep analysis", highlight: false },
 ];
 
 export default function CreditsPage() {
@@ -18,10 +18,10 @@ export default function CreditsPage() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState<number | null>(null);
 
-  const handleBuyCredits = async (amount: number, index: number) => {
+  const handleBuyCredits = async (pack: string, amount: number, index: number) => {
     setLoading(index);
     try {
-      const res = await api.addCredits(amount);
+      const res = await api.addCredits(pack);
       await refreshUser();
       toast.success(`Added ${amount} credits! New balance: ${res.new_balance}`);
     } catch (err: unknown) {
@@ -100,7 +100,7 @@ export default function CreditsPage() {
             </div>
             <p className="text-sm font-semibold text-primary">{pack.price}</p>
             <Button
-              onClick={() => handleBuyCredits(pack.amount, i)}
+              onClick={() => handleBuyCredits(pack.pack, pack.amount, i)}
               disabled={loading !== null}
               variant={pack.highlight ? "default" : "outline"}
               className="w-full"
@@ -118,7 +118,7 @@ export default function CreditsPage() {
       {/* Pricing info */}
       <div className="text-center space-y-2">
         <p className="text-xs text-muted-foreground">
-          Each enhancement or analysis costs 1-2 credits. Deep scans cost 2 credits.
+          Each enhancement costs 1 credit. Consistency, evolution & mindmap cost 2 credits. Deep scans cost 2 credits.
         </p>
         {isOutOfCredits && (
           <Button variant="ghost" size="sm" onClick={() => navigate("/dashboard")} className="text-muted-foreground">
