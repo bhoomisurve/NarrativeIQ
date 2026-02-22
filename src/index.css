@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 6%;
+    --foreground: 40 20% 92%;
+
+    --card: 222 40% 9%;
+    --card-foreground: 40 20% 92%;
+
+    --popover: 222 40% 9%;
+    --popover-foreground: 40 20% 92%;
+
+    --primary: 38 92% 55%;
+    --primary-foreground: 222 47% 6%;
+
+    --secondary: 222 30% 14%;
+    --secondary-foreground: 40 15% 80%;
+
+    --muted: 222 25% 12%;
+    --muted-foreground: 220 15% 50%;
+
+    --accent: 38 70% 45%;
+    --accent-foreground: 40 20% 95%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 222 25% 16%;
+    --input: 222 25% 14%;
+    --ring: 38 92% 55%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 222 40% 7%;
+    --sidebar-foreground: 40 15% 75%;
+    --sidebar-primary: 38 92% 55%;
+    --sidebar-primary-foreground: 222 47% 6%;
+    --sidebar-accent: 222 30% 12%;
+    --sidebar-accent-foreground: 40 15% 80%;
+    --sidebar-border: 222 25% 14%;
+    --sidebar-ring: 38 92% 55%;
+
+    /* Custom tokens */
+    --surface-elevated: 222 35% 11%;
+    --gold-glow: 38 92% 55%;
+    --gold-muted: 38 50% 35%;
+    --ink: 222 47% 6%;
+    --parchment: 40 30% 95%;
+    --success: 152 60% 45%;
+    --warning: 38 92% 55%;
+    --info: 210 80% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+  .font-sans {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(38 92% 55%), hsl(45 100% 70%), hsl(38 92% 55%));
+  }
+
+  .glow-gold {
+    box-shadow: 0 0 20px hsl(38 92% 55% / 0.15), 0 0 60px hsl(38 92% 55% / 0.05);
+  }
+
+  .surface-elevated {
+    background-color: hsl(var(--surface-elevated));
+  }
+
+  .border-glow {
+    border-color: hsl(38 92% 55% / 0.2);
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s linear infinite;
+    background-size: 200% 100%;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+}
